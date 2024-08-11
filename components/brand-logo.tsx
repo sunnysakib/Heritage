@@ -5,9 +5,9 @@ export const BrandLogo = () => {
   return (
     <Link href={'/'}>
       <Image
-        height={38}
-        width={184}
-        src={'/assets/images/brand-logo.svg'}
+        height={40}
+        width={40}
+        src={'/assets/images/logo.PNG'}
         alt='Brand Logo'
       />
     </Link>
