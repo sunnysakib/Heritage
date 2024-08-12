@@ -11,11 +11,11 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { TfiAlignRight } from "react-icons/tfi";
-
+// xl:px-[112px] lg:px-[80px] px-[30px]
 const Navbar = () => {
   return (
     <nav className="w-full bg-[rgb(236,245,255)]  ">
-      <div className="md:flex justify-between items-center xl:px-[112px] lg:px-[80px] px-[30px] py-2 hidden">
+      <div className="md:flex justify-between items-center container  py-2 hidden">
         <div className="flex gap-2">
           <Button variant="ghost">Buy</Button>
           <Button variant="ghost">Sell</Button>
