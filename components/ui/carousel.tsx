@@ -252,6 +252,64 @@ const CarouselNext = React.forwardRef<
 })
 CarouselNext.displayName = "CarouselNext"
 
+const CarouselPrevious1 = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<typeof Button>
+>(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+
+  return (
+    <Button
+      ref={ref}
+      variant={variant}
+      size={size}
+      className={cn(
+        "absolute  h-10 w-10 rounded-full bg-blue-400 hover:bg-blue-500",
+        orientation === "vertical"
+          ? "-left-[40px] top-1/2 -translate-y-1/2"
+          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+        className
+      )}
+      disabled={!canScrollPrev}
+      onClick={scrollPrev}
+      {...props}
+    >
+      <ArrowLeftIcon className="h-4 w-4 text-white" />
+      <span className="sr-only">Previous slide</span>
+    </Button>
+  )
+})
+CarouselPrevious1.displayName = "CarouselPrevious1"
+
+const CarouselNext1 = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<typeof Button>
+>(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+  const { orientation, scrollNext, canScrollNext } = useCarousel()
+
+  return (
+    <Button
+      ref={ref}
+      variant={variant}
+      size={size}
+      className={cn(
+        "absolute h-10 w-5 rounded-full bg-blue-400 hover:bg-blue-500",
+        orientation === "vertical"
+          ? "-right-[20px] top-1/2 -translate-y-1/2"
+          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+        className
+      )}
+      disabled={!canScrollNext}
+      onClick={scrollNext}
+      {...props}
+    >
+      {/* <ArrowRightIcon className="h-4 w-4 text-white" /> */}
+      <span className="sr-only">Next slide</span>
+    </Button>
+  )
+})
+CarouselNext1.displayName = "CarouselNext1"
+
 export {
   type CarouselApi,
   Carousel,
@@ -259,4 +317,6 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselNext1,
+  CarouselPrevious1
 }
