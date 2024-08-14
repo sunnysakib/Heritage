@@ -23,7 +23,11 @@ const Navbar = () => {
   }
   const getUser = storedUser ? JSON.parse(storedUser) : null;
   const handleLogout = () => {
+    try {
     sessionStorage.removeItem("user");
+    } catch (error) {
+      console.error("error");
+    }
     logout();
   };
 
