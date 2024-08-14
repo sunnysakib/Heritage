@@ -13,17 +13,17 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { redirect } from "next/navigation";
 import { useUser } from "@/lib/UserContext";
 const LoginFrom = () => {
   const router = useRouter()
-  const { user, login }: any = useUser();
+  const { login }: any = useUser();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
   const [error, setError] = useState("");
+  
   const onSubmit = async (data: any) => {
     try {
       const response = await fetch("https://heritage-backend.onrender.com/users/login", {
@@ -38,7 +38,7 @@ const LoginFrom = () => {
 
       if (result.message === "success") {
         setError("");
-        const getUser = sessionStorage.setItem("user", JSON.stringify(result.data));
+        sessionStorage.setItem("user", JSON.stringify(result.data));
         login(result.data);
         router.push("/")
 
