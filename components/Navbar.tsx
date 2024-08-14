@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { BrandLogo } from "./brand-logo";
 import {
@@ -11,14 +12,28 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { TfiAlignRight } from "react-icons/tfi";
+import Link from "next/link";
+import { useUser } from "@/lib/UserContext";
 // xl:px-[112px] lg:px-[80px] px-[30px]
 const Navbar = () => {
+  const { user, logout }: any = useUser();
+  const storedUser = sessionStorage.getItem("user");
+  const getUser = storedUser ? JSON.parse(storedUser) : null;
+  const handleLogout = () => {
+    sessionStorage.removeItem("user");
+    logout();
+  };
+
   return (
     <nav className="w-full bg-[rgb(236,245,255)]  ">
       <div className="md:flex justify-between items-center container  py-2 hidden">
         <div className="flex gap-2">
-          <Button variant="ghost">Buy</Button>
-          <Button variant="ghost">Sell</Button>
+          <Link href="/buyer-page">
+            <Button variant="ghost">Buy</Button>
+          </Link>
+          <Link href="/sell-property">
+            <Button variant="ghost">Sell</Button>
+          </Link>
           <Button variant="ghost">Services</Button>
         </div>
         <div>
@@ -26,7 +41,15 @@ const Navbar = () => {
         </div>
         <div className="flex gap-2">
           <Button variant="ghost">Manage Rentals</Button>
-          <Button variant="ghost">Sign In</Button>
+          {user || getUser !== null ? (
+            <Button variant="ghost" onClick={() => handleLogout()}>
+              Sign Out
+            </Button>
+          ) : (
+            <Button variant="ghost">
+              <Link href="/signIn">Sign In</Link>
+            </Button>
+          )}
         </div>
       </div>
 
@@ -41,12 +64,26 @@ const Navbar = () => {
               <TfiAlignRight />
             </MenubarTrigger>
             <MenubarContent>
-              <MenubarItem>Buy</MenubarItem>
-              <MenubarItem>Sell</MenubarItem>
+              <MenubarItem>
+                <Link href="/buyer-page">Buy</Link>
+              </MenubarItem>
+              <MenubarItem>
+                <Link href="/sell-property">Sell</Link>
+              </MenubarItem>
               <MenubarItem>Services</MenubarItem>
               <MenubarSeparator />
               <MenubarItem>Manage Rentals</MenubarItem>
-              <MenubarItem>Sign In</MenubarItem>
+              <MenubarItem>
+                {user || getUser !== null ? (
+                  <Button variant="ghost" onClick={() => handleLogout()}>
+                    Sign Out
+                  </Button>
+                ) : (
+                  <Button variant="ghost">
+                    <Link href="/signIn">Sign In</Link>
+                  </Button>
+                )}
+              </MenubarItem>
             </MenubarContent>
           </MenubarMenu>
         </Menubar>

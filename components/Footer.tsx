@@ -8,7 +8,7 @@ import { FaInstagramSquare } from "react-icons/fa";
 const Footer = () => {
   return (
     <section className=" bg-blue-50">
-      <div className="container grid grid-cols-8 gap-10 py-16">
+      <div className="container grid md:grid-cols-4 lg:grid-cols-8 grid-cols-2 gap-10 py-16">
         <div className="col-span-3 flex flex-col gap-4">
           <BrandLogo />
           <p>
