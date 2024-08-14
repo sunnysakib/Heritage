@@ -41,12 +41,18 @@ const Page = () => {
   const { toast } = useToast()
   const [error, setError] = useState("");
 
-const storedUser = window.sessionStorage.getItem("user");
-const getUser = storedUser ? JSON.parse(storedUser) : null;
-  if (!getUser ) return redirect("/signIn");
+  const [getUser, setGetUser] = useState<{ id: string; name: string } | null>(null);
+
+  useState(() => {
+    const storedUser = sessionStorage.getItem("user");
+    const user = storedUser ? JSON.parse(storedUser) : null;
+    setGetUser(user);
+    if (!user) return redirect("/signIn");
+  })
   
   const onSubmit = async (data: any) => {
-    
+    if (!getUser) return;
+
     const newData = {
       userId: getUser.id,
       ownerName: getUser.name,

@@ -22,14 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Suspense>
           <UserProvider>
             <Navbar />
             {children}
             <Toaster />
             <Footer />
           </UserProvider>
-        </Suspense>
       </body>
     </html>
   );
