@@ -17,10 +17,7 @@ import { TbCategory } from "react-icons/tb";
 const Page = ({ params }: { params: { id: string } }) => {
   const [property, setProperty] = useState<any[]>([]);
   const [maxBid, setMaxBid] = useState<any[]>([]);
-  console.log(maxBid);
-  const storedUser = sessionStorage.getItem("user");
-  const getUser = storedUser ? JSON.parse(storedUser) : null;
-  if (!getUser) return redirect("/signIn");
+  const [error, setError] = useState("");
   const {
     register,
     formState: { errors },
@@ -43,7 +40,13 @@ const Page = ({ params }: { params: { id: string } }) => {
 
 
   }, []);
-  const [error, setError] = useState("");
+
+  const storedUser = sessionStorage.getItem("user");
+  const getUser = storedUser ? JSON.parse(storedUser) : null;
+  if (!getUser) return redirect("/signIn");
+  
+
+  
   const onSubmit = async (data: any) => {
     const newData = {
       userId: getUser.id,
@@ -78,6 +81,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       console.error("Error checking user:", error);
     }
   };
+
   return (
     <div className="container">
       <div className=" mx-auto mt-10 mb-12">

@@ -28,9 +28,6 @@ import { useForm } from "react-hook-form";
 import { useToast } from "@/components/ui/use-toast";
 
 const Page = () => {
-const storedUser = sessionStorage.getItem("user");
-const getUser = storedUser ? JSON.parse(storedUser) : null;
-  if (!getUser ) return redirect("/signIn");
   const { getAllCountries } = useCountries();
   const [locationValue, setLocationValue] = useState("");
   const [typeValue, setTypeValue] = useState("");
@@ -43,6 +40,11 @@ const getUser = storedUser ? JSON.parse(storedUser) : null;
   } = useForm();
   const { toast } = useToast()
   const [error, setError] = useState("");
+
+const storedUser = sessionStorage.getItem("user");
+const getUser = storedUser ? JSON.parse(storedUser) : null;
+  if (!getUser ) return redirect("/signIn");
+  
   const onSubmit = async (data: any) => {
     
     const newData = {
@@ -53,7 +55,6 @@ const getUser = storedUser ? JSON.parse(storedUser) : null;
       propertyType: typeValue,
       category: categoryValue,
     };
-    console.log(newData.photo[0]);
     const form = new FormData();
     form.append("userId", getUser.id);
     form.append("ownerName", getUser.name);

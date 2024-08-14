@@ -17,10 +17,7 @@ const Page = () => {
           <TabsContent value="signup">
             <SignupForm />
           </TabsContent>
-          {/* <div className="bg-slate-200 py-4 text-center text-neutral-700 font-medium rounded-md mt-3">
-            <p>Admin: admin@gmail.com</p>
-            <p>password: admin</p>
-          </div> */}
+          
         </Tabs>
       </div>
     </div>

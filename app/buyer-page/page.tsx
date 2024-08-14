@@ -19,15 +19,19 @@ import { useUser } from "@/lib/UserContext";
 const data = ["Buy", "Rent", "PG", "Plot", "Commercial"];
 
 const Page = () => {
-  const storedUser = sessionStorage.getItem("user");
-  const getUser = storedUser ? JSON.parse(storedUser) : null;
-  if (!getUser) return redirect("/signIn");
+  const [location, setLocation] = useState<string>("");
+  const [propertyType, setPropertyType] = useState<string>("");
+  const [minPrice, setMinPrice] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [url, setUrl] = useState("");
-
   const params = new URLSearchParams();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const search = searchParams.get("filter");
+
+  useEffect(() => {
+    fetchProperties();
+    setUrl(`http://localhost:3000/search-property?${params.toString()}`);
+  }, [searchQuery, location, propertyType, minPrice]);
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -38,15 +42,19 @@ const Page = () => {
     [searchParams]
   );
 
+  const storedUser = sessionStorage.getItem("user");
+  const getUser = storedUser ? JSON.parse(storedUser) : null;
+  if (!getUser) return redirect("/signIn");
+
+  
+  const search = searchParams.get("filter");
+
+ 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     console.log("Search query:", query);
   };
 
-  const [location, setLocation] = useState<string>("");
-  const [propertyType, setPropertyType] = useState<string>("");
-  const [minPrice, setMinPrice] = useState<number | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>("");
 
   
 
@@ -55,14 +63,7 @@ const Page = () => {
     if (location) params.append("location", location);
     if (propertyType) params.append("propertyType", propertyType);
     if (minPrice !== null) params.append("minPrice", minPrice.toString());
-    
-    
   };
-
-  useEffect(() => {
-    fetchProperties();
-    setUrl(`http://localhost:3000/search-property?${params.toString()}`);
-  }, [searchQuery, location, propertyType, minPrice]);
 
   
 
