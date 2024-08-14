@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useUser } from "@/lib/UserContext";
 const LoginFrom = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { login }: any = useUser();
   const {
     register,
@@ -26,25 +26,29 @@ const LoginFrom = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await fetch("https://heritage-backend.onrender.com/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "https://heritage-backend.onrender.com/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       const result = await response.json();
-      
+
       if (result.message === "success") {
         setError("");
-        if(typeof window !== 'undefined'){
+        try {
           sessionStorage.setItem("user", JSON.stringify(result.data));
+        } catch (error) {
+          console.log(error);
         }
-        
-        login(result.data);
-        router.push("/")
 
+        login(result.data);
+        router.push("/");
       } else {
         setError(result.message);
       }
@@ -84,7 +88,7 @@ const LoginFrom = () => {
               id="name"
               placeholder="enter your email"
             />
-            
+
             {errors.email && (
               <p role="alert" className="text-red-500 text-sm">
                 {errors.email?.message?.toString()}

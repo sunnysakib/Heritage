@@ -18,8 +18,10 @@ import { useUser } from "@/lib/UserContext";
 const Navbar = () => {
   const { user, logout }: any = useUser();
   const [storedUser, setStoredUser] = useState<any>(null);
-  if (typeof window !== "undefined") {
+  try {
     sessionStorage.getItem("user");
+  } catch (error) {
+    console.log(error);
   }
   const getUser = storedUser ? JSON.parse(storedUser) : null;
   const handleLogout = () => {
