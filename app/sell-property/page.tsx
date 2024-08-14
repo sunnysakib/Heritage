@@ -29,7 +29,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useToast } from "@/components/ui/use-toast";
 
-const page = () => {
+const Page = () => {
 const storedUser = sessionStorage.getItem("user");
 const getUser = storedUser ? JSON.parse(storedUser) : null;
   if (!getUser ) return redirect("/signIn");
@@ -223,4 +223,4 @@ const getUser = storedUser ? JSON.parse(storedUser) : null;
   );
 };
 
-export default page;
+export default Page;

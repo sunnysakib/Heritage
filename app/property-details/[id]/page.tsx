@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { IoBedOutline } from "react-icons/io5";
 import { MdOutlineBathtub } from "react-icons/md";
 import { TbCategory } from "react-icons/tb";
-const page = ({ params }: { params: { id: string } }) => {
+const Page = ({ params }: { params: { id: string } }) => {
   const [property, setProperty] = useState<any[]>([]);
   const [maxBid, setMaxBid] = useState<any[]>([]);
   console.log(maxBid);
@@ -198,4 +198,4 @@ const page = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default page;
+export default Page;

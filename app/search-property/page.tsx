@@ -9,7 +9,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { PiMapPinSimpleAreaBold } from "react-icons/pi";
 import { BsBoundingBoxCircles } from "react-icons/bs";
 import { usePathname, useSearchParams } from "next/navigation";
-const page = () => {
+const Page = () => {
   const searchParams = useSearchParams();
   const [properties, setProperties] = useState<any[]>([]);
 
@@ -127,4 +127,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

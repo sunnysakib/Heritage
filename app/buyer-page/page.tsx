@@ -22,6 +22,9 @@ const Page = () => {
   const storedUser = sessionStorage.getItem("user");
   const getUser = storedUser ? JSON.parse(storedUser) : null;
   if (!getUser) return redirect("/signIn");
+  const [url, setUrl] = useState("");
+
+  const params = new URLSearchParams();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const search = searchParams.get("filter");
@@ -44,10 +47,9 @@ const Page = () => {
   const [propertyType, setPropertyType] = useState<string>("");
   const [minPrice, setMinPrice] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [properties, setProperties] = useState<any[]>([]);
 
-  const params = new URLSearchParams();
-  const [url, setUrl] = useState("");
+  
+
   const fetchProperties = () => {
     if (searchQuery) params.append("title", searchQuery);
     if (location) params.append("location", location);
@@ -62,10 +64,7 @@ const Page = () => {
     setUrl(`http://localhost:3000/search-property?${params.toString()}`);
   }, [searchQuery, location, propertyType, minPrice]);
 
-  // const handleSearchResult = () => {
-  //   fetchProperties();
-  //   // redirect(`https://heritage-backend.onrender.com/properties?${params.toString()}`)
-  // };
+  
 
   return (
     <section className="">

@@ -2,7 +2,7 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LoginFrom from "./_components/LoginFrom";
 import SignupForm from "./_components/SignupForm";
-const page = () => {
+const Page = () => {
   return (
     <div className="flex flex-col gap-y-10  py-[100px] justify-center items-center">
       <div>
@@ -27,4 +27,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

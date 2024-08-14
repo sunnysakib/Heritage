@@ -12,7 +12,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { Card, CardContent } from "@/components/ui/card";
-import Ratings from "./Ratings";
 const Testimonials = () => {
   return (
     <section className="container pb-16">
@@ -43,7 +42,7 @@ const Testimonials = () => {
                       <p className="text-center text-[#818181] text-sm">
                         "The level of security provided by CypherPlay is
                         unmatched. I feel confident using my card for both
-                        everyday purchases and travel. It's the peace of mind I
+                        everyday purchases and travel. It&apos;s the peace of mind I
                         was looking for."
                       </p>
                       <div className="flex flex-col items-center justify-center">
