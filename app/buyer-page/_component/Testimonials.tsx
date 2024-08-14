@@ -4,10 +4,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselNext1,
-  CarouselPrevious,
-  CarouselPrevious1,
 } from "@/components/ui/carousel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -38,12 +34,11 @@ const Testimonials = () => {
                 <Card>
                   <CardContent className="flex flex-col items-center justify-center p-6">
                     <div className="flex flex-col gap-6">
-                      {/* <Ratings/> */}
                       <p className="text-center text-[#818181] text-sm">
-                        "The level of security provided by CypherPlay is
+                      &quot;The level of security provided by CypherPlay is
                         unmatched. I feel confident using my card for both
                         everyday purchases and travel. It&apos;s the peace of mind I
-                        was looking for."
+                        was looking for.&quot;
                       </p>
                       <div className="flex flex-col items-center justify-center">
                         <Avatar>
@@ -64,8 +59,7 @@ const Testimonials = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {/* <CarouselPrevious1 />
-        <CarouselNext1 /> */}
+        
       </Carousel>
     </section>
   );
