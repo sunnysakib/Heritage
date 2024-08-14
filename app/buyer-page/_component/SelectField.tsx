@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import {
   Select,
@@ -13,19 +13,35 @@ import {
 import { useCountries } from "@/lib/getCountries";
 import { TbHomeSearch } from "react-icons/tb";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
-const SelectField = () => {
+import { Input } from "@/components/ui/input";
+
+interface SelectFieldProps {
+  setLocation: (location: string) => void;
+  setPropertyType: (propertyType: string) => void;
+  setMinPrice: (minPrice: number | null) => void;
+}
+const SelectField: React.FC<SelectFieldProps> = ({
+  setLocation,
+  setPropertyType,
+  setMinPrice,
+}) => {
   const { getAllCountries } = useCountries();
   const [locationValue, setLocationValue] = useState("");
-
+  const [properties, setProperties] = useState<any[]>([]);
+  useEffect(() => {
+    const result = fetch("http://localhost:5000/properties")
+      .then((res) => res.json())
+      .then((data) => setProperties(data));
+  }, []);
   return (
-    <div className="py-8 flex justify-between gap-8">
+    <div className="py-8 flex md:flex-row flex-col justify-between gap-8">
       <div className="w-full">
         <div className="flex gap-2 items-center pb-2">
           <FaLocationDot className="text-lg text-orange-600" />
           <p className="font-semibold">Your Location</p>
         </div>
         <div>
-          <Select  required onValueChange={(value) => setLocationValue(value)}>
+          <Select required onValueChange={(value) => {setLocationValue(value); setLocation(value)}}>
             <SelectTrigger className="w-full bg-blue-50">
               <SelectValue placeholder="" />
             </SelectTrigger>
@@ -33,8 +49,8 @@ const SelectField = () => {
               <SelectGroup>
                 <SelectLabel>Countries</SelectLabel>
                 {getAllCountries().map((item: any) => (
-                  <SelectItem key={item.value} value={item.value}>
-                    {item.label} / {item.region}
+                  <SelectItem key={item.label} value={item.label}>
+                    {item.label}
                   </SelectItem>
                 ))}
               </SelectGroup>
@@ -48,18 +64,17 @@ const SelectField = () => {
           <p className="font-semibold">Property Type</p>
         </div>
         <div>
-          <Select required onValueChange={(value) => setLocationValue(value)}>
+          <Select onValueChange={(value) => setPropertyType(value)}>
             <SelectTrigger className="w-full bg-blue-50">
               <SelectValue placeholder="" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectLabel>Countries</SelectLabel>
-                {getAllCountries().map((item: any) => (
-                  <SelectItem key={item.value} value={item.value}>
-                    {item.label} / {item.region}
-                  </SelectItem>
-                ))}
+                <SelectLabel>Property Type</SelectLabel>
+                <SelectItem value="Apartment">Apartment</SelectItem>
+                <SelectItem value="House">House</SelectItem>
+                <SelectItem value="Cotage">Cotage</SelectItem>
+                <SelectItem value="Old Town">Old Town</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -71,21 +86,8 @@ const SelectField = () => {
           <p className="font-semibold">Budget</p>
         </div>
         <div>
-          <Select required onValueChange={(value) => setLocationValue(value)}>
-            <SelectTrigger className="w-full bg-blue-50">
-              <SelectValue placeholder="" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Countries</SelectLabel>
-                {getAllCountries().map((item: any) => (
-                  <SelectItem key={item.value} value={item.value}>
-                    {item.label} / {item.region}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+
+          <Input className="bg-blue-50" type="number"   onChange={(e) => setMinPrice(Number(e.target.value))} />
         </div>
       </div>
     </div>

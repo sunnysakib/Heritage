@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -14,10 +15,14 @@ import { FaLocationDot } from "react-icons/fa6";
 import Link from "next/link";
 
 const PopularPopertyCarousel = () => {
+  const [properties, setProperties] = useState<any[]>([]);
+  useEffect(() => {
+    const result = fetch('http://localhost:5000/properties').then(res => res.json()).then(data => setProperties(data))
+  },[])
   return (
     <div className="container w-full pb-10">
         <div className="flex justify-between items-center pb-4">
-            <h1 className="text-[32px] font-semibold">Popular Properties</h1>
+            <h1 className="md:text-[32px] text-[24px] font-semibold">Popular Properties</h1>
             <Link className="underline font-medium text-blue-500" href='/'>See all porperty</Link>
         </div>
       <Carousel
@@ -27,14 +32,14 @@ const PopularPopertyCarousel = () => {
         className="w-full"
       >
         <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
+          {properties.map((item, index) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-              <div className="shadow-md">
+              <Link href={`property-details/${item.id}`} className="shadow-md">
                 <Card className="px-0 rounded-none bg-[#F9FAFB]">
                   <div className="p-0 cursor-pointer hover:bg-gray-100 flex flex-col items-center justify-center">
                     <div>
                       <Image
-                        src="/assets/images/house2.png"
+                        src={`http://localhost:5000/images/${item.photo}`}
                         className="w-[500px] h-[200px]"
                         alt="property buy"
                         width={485}
@@ -43,18 +48,18 @@ const PopularPopertyCarousel = () => {
                     </div>
                     <div className="flex justify-between w-full px-4 py-4 border-b">
                       <Badge className="bg-[#C5E2FF] hover:bg-[#C5E2FF] text-black rounded-sm">
-                        Apartment
+                        {item.propertyType}
                       </Badge>
                       <p className="flex items-center gap-1"><BiSolidCheckbox className="text-orange-500"/>Ready to Move</p>
                     </div>
                     <div className="w-full flex flex-col px-4 gap-y-1 py-4">
-                        <h1 className="text-[20px] font-semibold">SunnySlope Suites</h1>
-                        <p className="flex gap-1 items-center text-[#6B7280]"><FaLocationDot className="text-lg text-orange-600" /> Meadowshire Park, Greenfield, USA</p>
-                        <p className="text-[24px] font-semibold pt-4">$ 1,000,000</p>
+                        <h1 className="text-[20px] font-semibold">{item.title}</h1>
+                        <p className="flex gap-1 items-center text-[#6B7280]"><FaLocationDot className="text-lg text-orange-600" /> {item.location}</p>
+                        <p className="text-[24px] font-semibold pt-4">$ {item.price}</p>
                     </div>
                   </div>
                 </Card>
-              </div>
+              </Link>
             </CarouselItem>
           ))}
         </CarouselContent>

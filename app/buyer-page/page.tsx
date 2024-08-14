@@ -2,8 +2,8 @@
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-import React, { useCallback } from "react";
+import { redirect, usePathname, useSearchParams } from "next/navigation";
+import React, { useCallback, useEffect, useState } from "react";
 import SearchBar from "./_component/SearchBar";
 import SelectField from "./_component/SelectField";
 import CustomButton from "@/components/CustomButton";
@@ -13,10 +13,15 @@ import ListingCards from "./_component/ListingCards";
 import PopularPopertyCarousel from "./_component/PopularPopertyCarousel";
 import { Separator } from "@/components/ui/separator";
 import NewListedCarousel from "./_component/NewListedCarousel";
+import Testimonials from "./_component/Testimonials";
+import { useUser } from "@/lib/UserContext";
 
 const data = ["Buy", "Rent", "PG", "Plot", "Commercial"];
 
-const page = () => {
+const Page = () => {
+  const storedUser = sessionStorage.getItem("user");
+  const getUser = storedUser ? JSON.parse(storedUser) : null;
+  if (!getUser) return redirect("/signIn");
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const search = searchParams.get("filter");
@@ -31,9 +36,36 @@ const page = () => {
   );
 
   const handleSearch = (query: string) => {
+    setSearchQuery(query);
     console.log("Search query:", query);
-    // Implement your search logic here
   };
+
+  const [location, setLocation] = useState<string>("");
+  const [propertyType, setPropertyType] = useState<string>("");
+  const [minPrice, setMinPrice] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [properties, setProperties] = useState<any[]>([]);
+
+  const params = new URLSearchParams();
+  const [url, setUrl] = useState("");
+  const fetchProperties = () => {
+    if (searchQuery) params.append("title", searchQuery);
+    if (location) params.append("location", location);
+    if (propertyType) params.append("propertyType", propertyType);
+    if (minPrice !== null) params.append("minPrice", minPrice.toString());
+    
+    
+  };
+
+  useEffect(() => {
+    fetchProperties();
+    setUrl(`http://localhost:3000/search-property?${params.toString()}`);
+  }, [searchQuery, location, propertyType, minPrice]);
+
+  // const handleSearchResult = () => {
+  //   fetchProperties();
+  //   // redirect(`http://localhost:5000/properties?${params.toString()}`)
+  // };
 
   return (
     <section className="">
@@ -56,11 +88,21 @@ const page = () => {
                   </Link>
                 ))}
               </div>
-              <SearchBar onSearch={handleSearch} />
-              <SelectField />
-              <Button className="bg-blue-500 hover:bg-blue-600 w-full">
-                <CiSearch className="mr-2 h-4 w-4" /> Find Property
-              </Button>
+              <form>
+                <SearchBar onSearch={handleSearch} />
+                <SelectField
+                  setLocation={setLocation}
+                  setPropertyType={setPropertyType}
+                  setMinPrice={setMinPrice}
+                />
+                <Link href={url}>
+                  <Button
+                    className="bg-blue-500 hover:bg-blue-600 w-full"
+                  >
+                    <CiSearch className="mr-2 h-4 w-4" /> Find Property
+                  </Button>
+                </Link>
+              </form>
             </Card>
           </div>
         </div>
@@ -75,8 +117,10 @@ const page = () => {
       </div>
 
       <NewListedCarousel />
+
+      <Testimonials />
     </section>
   );
 };
 
-export default page;
+export default Page;

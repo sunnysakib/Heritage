@@ -12,7 +12,7 @@ const data = [
 
 const ListingCards = () => {
   return (
-    <div className="container flex justify-between gap-10 mt-40 pb-16">
+    <div className="container flex md:flex-row flex-col justify-between gap-10 md:mt-40 mt-[360px]  pb-16">
       {data.map((item, index) => (
         <Card
           key={index}

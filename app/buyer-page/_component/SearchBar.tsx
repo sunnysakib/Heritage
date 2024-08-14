@@ -1,34 +1,28 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 
 type SearchBarProps = {
   onSearch: (query: string) => void;
 };
 
-const mockSuggestions: string[] = [
-  "Apple",
-  "Banana",
-  "Cherry",
-  "Date",
-  "Elderberry",
-  "Fig",
-  "Grape",
-  "Honeydew",
-];
-
 export default function SearchBar({ onSearch }: SearchBarProps) {
   const [query, setQuery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-
+  const [properties, setProperties] = useState<any[]>([]);
+  useEffect(() => {
+    const result = fetch('http://localhost:5000/properties').then(res => res.json()).then(data => setProperties(data))
+  },[])
+  console.log(query);
+  const titles = properties.map(property => property.title);
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
 
     if (value) {
-      const filteredSuggestions = mockSuggestions.filter((item) =>
+      const filteredSuggestions = titles.filter((item) =>
         item.toLowerCase().includes(value.toLowerCase())
       );
       setSuggestions(filteredSuggestions);
