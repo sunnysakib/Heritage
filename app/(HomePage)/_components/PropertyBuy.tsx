@@ -21,11 +21,11 @@ const PropertyBuy = () => {
             height={504}
           />
         </div>
-        <div className="w-[600px] flex flex-col gap-6">
+        <div className="md:w-[600px] flex flex-col gap-6">
           <p className="text-orange-500 font-medium flex items-center">
             <IoRemoveOutline className="font-bold text-6xlF" /> Property Buying
           </p>
-          <h1 className="text-[40px] leading-[45px] text-[#111827] font-bold">
+          <h1 className="text-[40px] text-wrap leading-[45px] text-[#111827] font-bold">
             Efficient and Transparent Home Buying Solutions
           </h1>
           <p>
@@ -41,11 +41,11 @@ const PropertyBuy = () => {
         </div>
       </div>
       <div className="pt-20 flex lg:flex-row flex-col justify-between gap-10">
-        <div className="w-[600px] flex flex-col gap-6">
+        <div className="md:w-[600px] flex flex-col gap-6">
           <p className="text-orange-500 font-medium flex items-center">
             <IoRemoveOutline className="font-bold text-6xlF" /> Property Buying
           </p>
-          <h1 className="text-[40px] leading-[45px] text-[#111827] font-bold">
+          <h1 className="text-[40px] text-wrap leading-[45px] text-[#111827] font-bold">
             Efficient and Transparent Home Buying Solutions
           </h1>
           <p>
@@ -77,7 +77,7 @@ const PropertyBuy = () => {
             height={504}
           />
         </div>
-        <div className="w-[600px] flex flex-col gap-6">
+        <div className="md:w-[600px] flex flex-col gap-6">
           <p className="text-orange-500 font-medium flex items-center">
             <IoRemoveOutline className="font-bold text-6xlF" /> Property Buying
           </p>

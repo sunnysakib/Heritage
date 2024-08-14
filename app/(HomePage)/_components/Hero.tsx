@@ -6,10 +6,10 @@ const Hero = () => {
   return (
     <div className="bg-[url('/assets/images/hero.png')] bg-cover bg-center h-[500px]">
       <div className="flex flex-col gap-y-4 items-center justify-center h-full">
-        <h1 className="w-[696px] text-center text-6xl font-bold text-white">
+        <h1 className="lg:w-[696px] text-wrap  text-center text-6xl font-bold text-white">
           Your Portal to India&apos;s Exquisite Real Estate
         </h1>
-        <p className="w-[696px] text-center text-[16px]  text-white">
+        <p className="lg:w-[696px] text-wrap text-center text-[16px]  text-white">
           Seamlessly connecting you to the heartbeat of India&apos;s prime
           properties.
         </p>

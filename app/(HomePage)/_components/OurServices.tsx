@@ -27,7 +27,7 @@ const OurServices = () => {
     <section className="container pt-20">
       <h1 className="text-center text-[40px] font-bold">Our Services</h1>
 
-      <div className="flex justify-between gap-8 py-16">
+      <div className="flex lg:flex-row flex-col  justify-between gap-8 py-16">
         {data.map((item) => (
           <Card key={item.id} className="p-8 rounded bg-blue-50">
             <div className="flex gap-6">
