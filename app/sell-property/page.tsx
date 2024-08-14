@@ -70,7 +70,7 @@ const getUser = storedUser ? JSON.parse(storedUser) : null;
     form.append("photo", newData.photo[0]);
     try {
       const response = await axios.post(
-        "http://localhost:5000/properties",
+        "https://heritage-backend.onrender.com/properties",
         form,
         {
           headers: {
@@ -203,7 +203,7 @@ const getUser = storedUser ? JSON.parse(storedUser) : null;
                 </div> 
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="photos">Photos</Label>
-                  <input
+                  <Input
                     required
                     id="photo"
                     type="file"

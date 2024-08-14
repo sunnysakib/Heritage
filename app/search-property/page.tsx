@@ -24,7 +24,7 @@ const page = () => {
 
   const price = searchParams?.get("minPrice");
   const propertyType = searchParams?.get("propertyType");
-  let url = new URL("http://localhost:5000/properties/filter");
+  let url = new URL("https://heritage-backend.onrender.com/properties/filter");
 
   const params = new URLSearchParams();
 
@@ -65,7 +65,7 @@ const page = () => {
               <div className="flex gap-4">
                 <div className="w-[20%]">
                   <Image
-                   src={`http://localhost:5000/images/${item.photo}`}
+                   src={`https://heritage-backend.onrender.com/images/${item.photo}`}
                     className="w-[152px] h-[184px] rounded-sm"
                     alt="hosue.png"
                     width={500}

@@ -17,7 +17,7 @@ import Link from "next/link";
 const NewListedCarousel = () => {
   const [properties, setProperties] = useState<any[]>([]);
   useEffect(() => {
-    const result = fetch("http://localhost:5000/properties")
+    const result = fetch("https://heritage-backend.onrender.com/properties")
       .then((res) => res.json())
       .then((data) => setProperties(data));
   }, []);
@@ -38,12 +38,12 @@ const NewListedCarousel = () => {
         <CarouselContent>
           {properties.map((item, index) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-              <div className="shadow-md">
+              <Link href={`property-details/${item.id}`} className="shadow-md">
                 <Card className="px-0 rounded-none bg-[#F9FAFB]">
                   <div className="p-0 cursor-pointer hover:bg-gray-100 flex flex-col items-center justify-center">
                     <div>
                       <Image
-                        src={`http://localhost:5000/images/` + item.photo}
+                        src={`https://heritage-backend.onrender.com/images/${item.photo}`}
                         className="w-[500px] h-[200px]"
                         alt="property buy"
                         width={485}
@@ -54,26 +54,16 @@ const NewListedCarousel = () => {
                       <Badge className="bg-[#C5E2FF] hover:bg-[#C5E2FF] text-black rounded-sm">
                         {item.propertyType}
                       </Badge>
-                      <p className="flex items-center gap-1">
-                        <BiSolidCheckbox className="text-orange-500" />
-                        Ready to Move
-                      </p>
+                      <p className="flex items-center gap-1"><BiSolidCheckbox className="text-orange-500"/>Ready to Move</p>
                     </div>
                     <div className="w-full flex flex-col px-4 gap-y-1 py-4">
-                      <h1 className="text-[20px] font-semibold">
-                        {item.title}
-                      </h1>
-                      <p className="flex gap-1 items-center text-[#6B7280]">
-                        <FaLocationDot className="text-lg text-orange-600" />{" "}
-                        {item.location}
-                      </p>
-                      <p className="text-[24px] font-semibold pt-4">
-                        $ {item.price}
-                      </p>
+                        <h1 className="text-[20px] font-semibold">{item.title}</h1>
+                        <p className="flex gap-1 items-center text-[#6B7280]"><FaLocationDot className="text-lg text-orange-600" /> {item.location}</p>
+                        <p className="text-[24px] font-semibold pt-4">$ {item.price}</p>
                     </div>
                   </div>
                 </Card>
-              </div>
+              </Link>
             </CarouselItem>
           ))}
         </CarouselContent>

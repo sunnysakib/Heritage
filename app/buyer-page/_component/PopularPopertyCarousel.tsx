@@ -17,7 +17,7 @@ import Link from "next/link";
 const PopularPopertyCarousel = () => {
   const [properties, setProperties] = useState<any[]>([]);
   useEffect(() => {
-    const result = fetch('http://localhost:5000/properties').then(res => res.json()).then(data => setProperties(data))
+    const result = fetch('https://heritage-backend.onrender.com/properties').then(res => res.json()).then(data => setProperties(data))
   },[])
   return (
     <div className="container w-full pb-10">
@@ -39,7 +39,7 @@ const PopularPopertyCarousel = () => {
                   <div className="p-0 cursor-pointer hover:bg-gray-100 flex flex-col items-center justify-center">
                     <div>
                       <Image
-                        src={`http://localhost:5000/images/${item.photo}`}
+                        src={`https://heritage-backend.onrender.com/images/${item.photo}`}
                         className="w-[500px] h-[200px]"
                         alt="property buy"
                         width={485}

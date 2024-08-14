@@ -64,7 +64,7 @@ const Page = () => {
 
   // const handleSearchResult = () => {
   //   fetchProperties();
-  //   // redirect(`http://localhost:5000/properties?${params.toString()}`)
+  //   // redirect(`https://heritage-backend.onrender.com/properties?${params.toString()}`)
   // };
 
   return (

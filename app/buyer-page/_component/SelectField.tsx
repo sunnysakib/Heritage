@@ -29,7 +29,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   const [locationValue, setLocationValue] = useState("");
   const [properties, setProperties] = useState<any[]>([]);
   useEffect(() => {
-    const result = fetch("http://localhost:5000/properties")
+    const result = fetch("https://heritage-backend.onrender.com/properties")
       .then((res) => res.json())
       .then((data) => setProperties(data));
   }, []);

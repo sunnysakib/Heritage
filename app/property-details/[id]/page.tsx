@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/use-toast";
-import axios from "axios";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -31,13 +30,13 @@ const page = ({ params }: { params: { id: string } }) => {
 
   useEffect(() => {
     const result = fetch(
-      `http://localhost:5000/properties/details/${params.id}`
+      `https://heritage-backend.onrender.com/properties/details/${params.id}`
     )
       .then((res) => res.json())
       .then((data) => setProperty(data));
 
     const bit = fetch(
-      `http://localhost:5000/bid/max/${params.id}`
+      `https://heritage-backend.onrender.com/bid/max/${params.id}`
     )
       .then((res) => res.json())
       .then((data) => setMaxBid(data.data));
@@ -56,7 +55,7 @@ const page = ({ params }: { params: { id: string } }) => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/bid/create", {
+      const response = await fetch("https://heritage-backend.onrender.com/bid/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +87,7 @@ const page = ({ params }: { params: { id: string } }) => {
         <div className="relative h-[550px]">
           <Image
             alt="Image of Home"
-            src={`http://localhost:5000/images/${property[0]?.photo}`}
+            src={`https://heritage-backend.onrender.com/images/${property[0]?.photo}`}
             fill
             className="rounded-lg h-full object-cover w-full"
           />

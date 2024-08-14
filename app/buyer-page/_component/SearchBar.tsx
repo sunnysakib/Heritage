@@ -13,7 +13,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [properties, setProperties] = useState<any[]>([]);
   useEffect(() => {
-    const result = fetch('http://localhost:5000/properties').then(res => res.json()).then(data => setProperties(data))
+    const result = fetch('https://heritage-backend.onrender.com/properties').then(res => res.json()).then(data => setProperties(data))
   },[])
   console.log(query);
   const titles = properties.map(property => property.title);

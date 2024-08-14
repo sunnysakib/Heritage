@@ -26,7 +26,7 @@ const LoginFrom = () => {
   const [error, setError] = useState("");
   const onSubmit = async (data: any) => {
     try {
-      const response = await fetch("http://localhost:5000/users/login", {
+      const response = await fetch("https://heritage-backend.onrender.com/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
