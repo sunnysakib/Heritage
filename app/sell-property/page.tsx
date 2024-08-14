@@ -21,9 +21,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useCountries } from "@/lib/getCountries";
-import { useUser } from "@/lib/UserContext";
 import { SelectGroup } from "@radix-ui/react-select";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
