@@ -1,37 +1,103 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+#  The "Heritage" project System Documentation
 
-First, run the development server:
+The "Heritage" project is a comprehensive web application that enables users to explore, bid on, and manage properties. It includes both front-end and back-end development, featuring property listings with detailed information and images, a bidding system that allows users to place and track bids, and role-based access for administrators, bidders, and property owners. The application also includes testimonials, search, and filter functionalities to enhance user experience.
+## Tech Stack
+
+**Frontend:** Nextjs, TailwindCSS, React Hook Form, Shadcn UI, axios.
+
+**Backend:** Node, Express, Bcrypt, Date-fns, Nodemon, jwt, multer.
+
+**Database:** MySQL
+
+## Key Features
+
+### Property Listings
+- View detailed information and images for each property.
+- Display the current highest bid, including bid amount, bidder details, and location.
+
+### Bidding System
+- **Placing a Bid:** Users can submit bids within a specified range, with validation to ensure only valid bids are accepted.
+- **Bid Win:** The highest bidder wins the property, and the property is displayed in the winner's profile.
+
+### Role Management
+
+- **Admin:** Manages users, properties, and oversees all bidding activities.
+- **Bidder:** Can place bids, view property details, and track their bidding history.
+- **Property Owner:** Lists properties and monitors ongoing bids.
+
+
+## Installation
+
+Install my-project with npm
+
+### Backend Setup
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/sunnysakib/heritage-backend.git
+cd heritage-backend/backend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Set up the MySQL database:
 
-## Learn More
+- Upload the database into the pgAdmin 4
 
-To learn more about Next.js, take a look at the following resources:
+4. Configure the database connection:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+host: "localhost",
+user: your_db_username,
+password: your_db_password,
+database: lunch_menu_db,
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<!-- configure it in src/utils/db.js -->
 
-## Deploy on Vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. Start the backend server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# Heritage
+```
+ npm run dev
+ ```
+ or
+ ```
+ npm start
+
+```
+
+### Frontend Setup
+
+1. Navigate to the frontend directory:
+
+```
+git clone https://github.com/sunnysakib/Heritage.git
+cd ../Heritage
+```
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+3. Start the frontend development server:
+```
+npm run dev
+```
+
+## Conclusion 
+
+This documentation provides an overview of the Project, including its features, setup instructions, API endpoints, and user interface. For more detailed information, please refer to the project's codebase and inline comments.
+
+
+## Demo
+
+
