@@ -23,7 +23,7 @@ const LoginFrom = () => {
     handleSubmit,
   } = useForm();
   const [error, setError] = useState("");
-  
+
   const onSubmit = async (data: any) => {
     try {
       const response = await fetch("https://heritage-backend.onrender.com/users/login", {
@@ -35,10 +35,13 @@ const LoginFrom = () => {
       });
 
       const result = await response.json();
-
+      
       if (result.message === "success") {
         setError("");
-        sessionStorage.setItem("user", JSON.stringify(result.data));
+        if(typeof window !== 'undefined'){
+          sessionStorage.setItem("user", JSON.stringify(result.data));
+        }
+        
         login(result.data);
         router.push("/")
 

@@ -42,7 +42,7 @@ const Page = () => {
     [searchParams]
   );
 
-  const storedUser = sessionStorage.getItem("user");
+  const storedUser = window.sessionStorage.getItem("user");
   const getUser = storedUser ? JSON.parse(storedUser) : null;
   if (!getUser) return redirect("/signIn");
 

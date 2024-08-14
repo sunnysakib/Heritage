@@ -41,7 +41,7 @@ const Page = () => {
   const { toast } = useToast()
   const [error, setError] = useState("");
 
-const storedUser = sessionStorage.getItem("user");
+const storedUser = window.sessionStorage.getItem("user");
 const getUser = storedUser ? JSON.parse(storedUser) : null;
   if (!getUser ) return redirect("/signIn");
   

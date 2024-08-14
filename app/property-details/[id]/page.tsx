@@ -37,34 +37,35 @@ const Page = ({ params }: { params: { id: string } }) => {
     )
       .then((res) => res.json())
       .then((data) => setMaxBid(data.data));
-
-
+  }, []);
+  let getUser: { id: any; name: any; email: any; };
+  useEffect(() => {
+    const storedUser = sessionStorage.getItem("user");
+    const getUser = storedUser ? JSON.parse(storedUser) : null;
+    if (!getUser) return redirect("/signIn");
   }, []);
 
-  const storedUser = sessionStorage.getItem("user");
-  const getUser = storedUser ? JSON.parse(storedUser) : null;
-  if (!getUser) return redirect("/signIn");
-  
-
-  
   const onSubmit = async (data: any) => {
     const newData = {
-      userId: getUser.id,
+      userId: getUser?.id,
       ...data,
-      name: getUser.name,
-      email: getUser.email,
+      name: getUser?.name,
+      email: getUser?.email,
       propertyId: property[0]?.id,
       propertyName: property[0]?.title,
     };
 
     try {
-      const response = await fetch("https://heritage-backend.onrender.com/bid/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newData),
-      });
+      const response = await fetch(
+        "https://heritage-backend.onrender.com/bid/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newData),
+        }
+      );
 
       const result = await response.json();
 
@@ -192,8 +193,8 @@ const Page = ({ params }: { params: { id: string } }) => {
               <h1 className="font-medium text-xl my-3">
                 Current heighest Bidder Info
               </h1>
-            <p>Bidder Name {maxBid[0]?.name}</p>
-            <p>Bid {maxBid[0]?.bidAmount}</p>
+              <p>Bidder Name {maxBid[0]?.name}</p>
+              <p>Bid {maxBid[0]?.bidAmount}</p>
             </div>
           </div>
         </div>
