@@ -29,6 +29,12 @@ const Page = () => {
   const pathname = usePathname();
 
   useEffect(() => {
+    const storedUser = sessionStorage.getItem("user");
+    const getUser = storedUser ? JSON.parse(storedUser) : null;
+    if (!getUser) return redirect("/signIn");
+  }, []);
+  
+  useEffect(() => {
     fetchProperties();
     setUrl(`http://localhost:3000/search-property?${params.toString()}`);
   }, [searchQuery, location, propertyType, minPrice]);
@@ -42,21 +48,14 @@ const Page = () => {
     [searchParams]
   );
 
-  const storedUser = window.sessionStorage.getItem("user");
-  const getUser = storedUser ? JSON.parse(storedUser) : null;
-  if (!getUser) return redirect("/signIn");
-
   
+
   const search = searchParams.get("filter");
 
- 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     console.log("Search query:", query);
   };
-
-
-  
 
   const fetchProperties = () => {
     if (searchQuery) params.append("title", searchQuery);
@@ -64,8 +63,6 @@ const Page = () => {
     if (propertyType) params.append("propertyType", propertyType);
     if (minPrice !== null) params.append("minPrice", minPrice.toString());
   };
-
-  
 
   return (
     <section className="">
@@ -96,9 +93,7 @@ const Page = () => {
                   setMinPrice={setMinPrice}
                 />
                 <Link href={url}>
-                  <Button
-                    className="bg-blue-500 hover:bg-blue-600 w-full"
-                  >
+                  <Button className="bg-blue-500 hover:bg-blue-600 w-full">
                     <CiSearch className="mr-2 h-4 w-4" /> Find Property
                   </Button>
                 </Link>

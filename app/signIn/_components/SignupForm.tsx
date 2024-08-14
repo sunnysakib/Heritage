@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
+import { redirect } from "next/navigation";
 const SignupForm = () => {
   const {
     register,
@@ -34,7 +35,7 @@ const SignupForm = () => {
 
       if (result.message === "created") {
         setError("");
-        window.location.reload();
+        redirect("/signIn");
       } else {
         setError(result.message);
       }

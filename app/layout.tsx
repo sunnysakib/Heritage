@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { UserProvider } from "@/lib/UserContext";
 import { Toaster } from "@/components/ui/toaster";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +22,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <UserProvider>
-          <Navbar />
-          {children}
-          <Toaster />
-          <Footer />
-        </UserProvider>
+        <Suspense>
+          <UserProvider>
+            <Navbar />
+            {children}
+            <Toaster />
+            <Footer />
+          </UserProvider>
+        </Suspense>
       </body>
     </html>
   );
